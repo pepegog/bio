@@ -1,0 +1,235 @@
+/* === БАЗА И ШРИФТ === */
+@font-face {
+  font-family: 'CascadiaMono';
+  src: url('cascadiamononerdfontslightitalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --bg-dark: #0a0a0f;
+  --text-main: #e4e4e7;
+  --text-dim: #a1a1aa;
+  --accent-blue: #7cb9e8;
+  --card-bg: rgba(20, 20, 25, 0.65);
+  --card-border: rgba(255, 255, 255, 0.12);
+  --blur-val: 12px;
+  --radius: 20px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'CascadiaMono', monospace, system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* === ФОН И ТОЧКИ === */
+.bg-glow {
+  position: fixed;
+  bottom: -15%;
+  left: 0;
+  width: 100%;
+  height: 45%;
+  background: radial-gradient(ellipse at center bottom, rgba(255,255,255,0.05) 0%, transparent 65%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+#bg-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* === КАРТОЧКА === */
+.card {
+  position: relative;
+  z-index: 1;
+  width: 540px;
+  max-width: 90vw;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
+  backdrop-filter: blur(var(--blur-val));
+  -webkit-backdrop-filter: blur(var(--blur-val));
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+/* Переливающийся чёрно-белый оверлей (GPU-дружелюбный) */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #000 0%, #fff 45%, #000 100%);
+  background-size: 300% 300%;
+  opacity: 0.04;
+  animation: shimmer 10s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* === АДАПТИВ ПОД ТЕЛЕФОН === */
+@media (max-width: 768px) {
+  .card {
+    width: 94vw;
+    min-height: 88vh;
+    padding: 1.5rem 1rem;
+    background: rgba(12, 12, 16, 0.72); /* более прозрачный */
+    --blur-val: 18px; /* заметнее, но стабильно */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  }
+  .avatar {
+    width: 90px;
+    height: 90px;
+  }
+  .info-block {
+    font-size: 0.85rem;
+  }
+}
+
+/* === КОНТЕНТ === */
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-blue);
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 1rem;
+}
+
+.nickname {
+  font-size: 1.75rem;
+  font-weight: 400;
+  margin-bottom: 0.4rem;
+  color: #fff;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  margin-bottom: 1.5rem;
+}
+
+.info-block {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--text-main);
+  text-align: left;
+  white-space: pre-line; /* сохраняет переносы как в исходнике */
+  margin-bottom: 1.8rem;
+  padding: 0 0.2rem;
+}
+
+/* === КНОПКИ === */
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.65rem 1.3rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  color: #fff;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.04);
+  transition: background 0.2s ease, transform 0.1s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:hover { background: rgba(255, 255, 255, 0.1); }
+.btn:active { transform: scale(0.97); }
+
+/* === ЭКОНОМИЯ РЕСУРСОВ (ОС) === */
+@media (prefers-reduced-motion: reduce) {
+  .card::before { animation: none; opacity: 0.06; }
+  #bg-canvas { display: none; }
+}
+/* === SOCIAL PAGE === */
+.social-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 1rem 0;
+}
+
+.social-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.social-link:hover {
+  opacity: 0.85;
+}
+
+.social-link:active {
+  transform: scale(0.97);
+}
+
+.social-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  filter: brightness(0.95);
+}
+
+.social-text {
+  font-size: 1.05rem;
+  color: var(--text-main);
+  font-family: inherit;
+  letter-spacing: 0.02em;
+}
+
+/* Адаптив под телефон */
+@media (max-width: 768px) {
+  .social-container {
+    gap: 2rem;
+    min-height: 55vh;
+  }
+  .social-icon {
+    width: 42px;
+    height: 42px;
+  }
+  .social-text {
+    font-size: 0.95rem;
+  }
+}
