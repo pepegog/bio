@@ -175,66 +175,6 @@ body {
   #bg-canvas { display: none; }
 }
 
-/* === ADS PAGE === */
-.ads-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-  align-items: center;
-  justify-content: center;
-  min-height: 60vh;
-  padding: 1rem 0;
-}
-
-.ads-link {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.8rem;
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-  transition: opacity 0.2s ease, transform 0.15s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.ads-link:hover {
-  opacity: 0.85;
-}
-
-.ads-link:active {
-  transform: scale(0.97);
-}
-
-.ads-icon {
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
-  filter: brightness(0.95);
-}
-
-.ads-text {
-  font-size: 1.05rem;
-  color: var(--text-main);
-  font-family: inherit;
-  letter-spacing: 0.02em;
-}
-
-/* Адаптив под телефон */
-@media (max-width: 768px) {
-  .ads-container {
-    gap: 2rem;
-    min-height: 55vh;
-  }
-  .ads-icon {
-    width: 42px;
-    height: 42px;
-  }
-  .ads-text {
-    font-size: 0.95rem;
-  }
-}
-
 /* === SOCIAL PAGE === */
 .social-container {
   display: flex;
