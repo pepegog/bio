@@ -233,4 +233,27 @@ body {
   .social-text {
     font-size: 0.95rem;
   }
+  /* === SPOTIFY WIDGET === */
+.spotify-widget {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.spotify-title {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  text-align: center;
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 768px) {
+  .spotify-widget {
+    margin-top: 1.5rem;
+    padding-top: 1.2rem;
+  }
+  .spotify-title {
+    font-size: 0.8rem;
+  }
 }
